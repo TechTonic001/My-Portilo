@@ -6,53 +6,46 @@ import AboutMe from './components/apps/AboutMe';
 import FileExplorer from './components/apps/FileExplorer';
 import './index.css';
 
-// Windows 11 default wallpaper as a gorgeous gradient
-const wallpaperStyle = {
-  position: 'fixed',
-  inset: 0,
-  background: `
-    radial-gradient(ellipse at 20% 50%, rgba(0, 82, 212, 0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(99, 20, 195, 0.45) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(0, 140, 255, 0.35) 0%, transparent 45%),
-    radial-gradient(ellipse at 10% 90%, rgba(23, 110, 230, 0.4) 0%, transparent 50%),
-    linear-gradient(135deg, #001832 0%, #002b6e 30%, #0042a8 55%, #1a5fb4 75%, #1b3a8c 100%)
-  `,
-  overflow: 'hidden',
-  zIndex: 0,
-};
-
-const WallpaperOrbs = () => (
-  <>
-    <div style={{
-      position: 'absolute',
-      width: '60vw', height: '60vw', borderRadius: '50%',
-      background: 'radial-gradient(circle, rgba(0,120,255,0.18) 0%, transparent 70%)',
-      top: '-15%', left: '-10%', pointerEvents: 'none',
-    }} />
-    <div style={{
-      position: 'absolute',
-      width: '50vw', height: '50vw', borderRadius: '50%',
-      background: 'radial-gradient(circle, rgba(80,0,200,0.2) 0%, transparent 70%)',
-      bottom: '5%', right: '-10%', pointerEvents: 'none',
-    }} />
-    <div style={{
-      position: 'absolute',
-      width: '30vw', height: '30vw', borderRadius: '50%',
-      background: 'radial-gradient(circle, rgba(0,180,255,0.15) 0%, transparent 70%)',
-      top: '30%', right: '20%', pointerEvents: 'none',
-    }} />
-    <div style={{
-      position: 'absolute', width: '200%', height: '2px',
-      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)',
-      top: '38%', left: '-50%', transform: 'rotate(-8deg)', pointerEvents: 'none',
-    }} />
-  </>
+/* ─── Win11 wallpaper gradient ─────────────────────────────────────────────── */
+const Wallpaper = () => (
+  <div
+    aria-hidden="true"
+    style={{
+      position: 'fixed',
+      inset: 0,
+      zIndex: 0,
+      background: `
+        radial-gradient(ellipse at 18% 48%, rgba(0,82,212,0.6) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 18%, rgba(99,20,195,0.5) 0%, transparent 48%),
+        radial-gradient(ellipse at 62% 82%, rgba(0,140,255,0.38) 0%, transparent 44%),
+        radial-gradient(ellipse at 8%,  90%, rgba(20,100,220,0.42) 0%, transparent 46%),
+        linear-gradient(140deg, #001530 0%, #002060 28%, #003ea0 54%, #1a5fb4 76%, #1b3280 100%)
+      `,
+      pointerEvents: 'none',
+      overflow: 'hidden',
+    }}
+  >
+    {/* Light orbs */}
+    <div style={{ position:'absolute', width:'62vw', height:'62vw', borderRadius:'50%',
+      background:'radial-gradient(circle, rgba(0,120,255,0.16) 0%, transparent 70%)',
+      top:'-14%', left:'-9%', pointerEvents:'none' }} />
+    <div style={{ position:'absolute', width:'52vw', height:'52vw', borderRadius:'50%',
+      background:'radial-gradient(circle, rgba(80,0,200,0.18) 0%, transparent 70%)',
+      bottom:'4%', right:'-9%', pointerEvents:'none' }} />
+    <div style={{ position:'absolute', width:'32vw', height:'32vw', borderRadius:'50%',
+      background:'radial-gradient(circle, rgba(0,180,255,0.14) 0%, transparent 70%)',
+      top:'32%', right:'22%', pointerEvents:'none' }} />
+    {/* Diagonal shimmer */}
+    <div style={{ position:'absolute', width:'220%', height:'2px',
+      background:'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%)',
+      top:'37%', left:'-60%', transform:'rotate(-8deg)', pointerEvents:'none' }} />
+  </div>
 );
 
-// Desktop shortcut icons
-const desktopApps = [
-  { id: 'about', icon: '📝', label: 'About Me', title: 'About Me — Notepad', component: AboutMe },
-  { id: 'files', icon: '📁', label: 'File Explorer', title: 'File Explorer', component: FileExplorer },
+/* ─── Desktop shortcut icons ────────────────────────────────────────────────── */
+const DESKTOP_APPS = [
+  { id: 'about', icon: '📝', label: 'About Me',      title: 'About Me — Notepad', component: AboutMe },
+  { id: 'files', icon: '📁', label: 'File Explorer', title: 'File Explorer',       component: FileExplorer },
 ];
 
 const DesktopIcon = ({ app }) => {
@@ -61,35 +54,36 @@ const DesktopIcon = ({ app }) => {
     <button
       id={`desktop-icon-${app.id}`}
       onDoubleClick={() => openWindow(app.title, app.component)}
+      title={`Double-click to open ${app.label}`}
       style={{
         background: 'transparent',
         border: '1px solid transparent',
         borderRadius: 8,
-        padding: '10px 12px',
+        padding: '10px 8px',
         cursor: 'pointer',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: 6,
-        width: 80,
+        width: 76,
         color: '#fff',
         transition: 'background 0.15s, border-color 0.15s',
       }}
       onMouseEnter={e => {
         e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)';
       }}
       onMouseLeave={e => {
         e.currentTarget.style.background = 'transparent';
         e.currentTarget.style.borderColor = 'transparent';
       }}
     >
-      <span style={{ fontSize: 36, lineHeight: 1 }}>{app.icon}</span>
+      <span style={{ fontSize: 34, lineHeight: 1 }}>{app.icon}</span>
       <span style={{
-        fontSize: 11.5,
+        fontSize: 11,
         fontWeight: 500,
         textAlign: 'center',
-        textShadow: '0 1px 4px rgba(0,0,0,0.8)',
+        textShadow: '0 1px 6px rgba(0,0,0,0.9)',
         lineHeight: 1.3,
       }}>
         {app.label}
@@ -98,34 +92,32 @@ const DesktopIcon = ({ app }) => {
   );
 };
 
-function App() {
+/* ─── App root ──────────────────────────────────────────────────────────────── */
+export default function App() {
   const windows = useOsStore((s) => s.windows);
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
-      {/* Wallpaper layer */}
-      <div style={wallpaperStyle}>
-        <WallpaperOrbs />
-      </div>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'fixed', inset: 0 }}>
+      {/* Layer 0 — Wallpaper */}
+      <Wallpaper />
 
-      {/* Desktop icons — top-left area */}
+      {/* Layer 1 — Desktop icons */}
       <div
         style={{
           position: 'fixed',
           top: 16,
-          left: 16,
+          left: 12,
+          zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
           gap: 4,
-          zIndex: 5,
+          pointerEvents: 'auto',
         }}
       >
-        {desktopApps.map((app) => (
-          <DesktopIcon key={app.id} app={app} />
-        ))}
+        {DESKTOP_APPS.map((app) => <DesktopIcon key={app.id} app={app} />)}
       </div>
 
-      {/* Windows layer */}
+      {/* Layer 2 — Open Windows */}
       <AnimatePresence>
         {windows.map((win, i) => (
           <Window
@@ -133,7 +125,7 @@ function App() {
             id={win.id}
             title={win.title}
             component={win.component}
-            props={win.props}
+            props={win.props || {}}
             zIndex={win.zIndex}
             isMinimized={win.isMinimized}
             isMaximized={win.isMaximized}
@@ -142,10 +134,8 @@ function App() {
         ))}
       </AnimatePresence>
 
-      {/* Taskbar — always on top */}
+      {/* Layer 9999 — Taskbar */}
       <Taskbar />
     </div>
   );
 }
-
-export default App;
