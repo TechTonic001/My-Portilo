@@ -15,10 +15,10 @@ const Wallpaper = () => (
       inset: 0,
       zIndex: 0,
       background: `
-        radial-gradient(ellipse at 18% 48%, rgba(0,82,212,0.6) 0%, transparent 52%),
-        radial-gradient(ellipse at 82% 18%, rgba(99,20,195,0.5) 0%, transparent 48%),
-        radial-gradient(ellipse at 62% 82%, rgba(0,140,255,0.38) 0%, transparent 44%),
-        radial-gradient(ellipse at 8%,  90%, rgba(20,100,220,0.42) 0%, transparent 46%),
+        radial-gradient(ellipse at 18% 48%, rgba(0,82,212,0.65) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 18%, rgba(99,20,195,0.55) 0%, transparent 48%),
+        radial-gradient(ellipse at 62% 82%, rgba(0,140,255,0.4) 0%, transparent 44%),
+        radial-gradient(ellipse at 8% 90%, rgba(20,100,220,0.45) 0%, transparent 46%),
         linear-gradient(140deg, #001530 0%, #002060 28%, #003ea0 54%, #1a5fb4 76%, #1b3280 100%)
       `,
       pointerEvents: 'none',
