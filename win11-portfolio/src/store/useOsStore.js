@@ -5,10 +5,22 @@ let nextId = 1;
 const useOsStore = create((set, get) => ({
   windows: [],
   maxZIndex: 10,
+  wallpaper: 'bloom',        // bloom | mountains | ocean | forest | city | abstract
+  theme: 'dark',             // dark | light
+  isShuttingDown: false,
+  isLocked: true,
+
+  setWallpaper: (wp) => set({ wallpaper: wp }),
+  setTheme: (t) => set({ theme: t }),
+
+  unlock: () => set({ isLocked: false }),
+  lock: () => set({ isLocked: true }),
+
+  shutdown: () => set({ isShuttingDown: true }),
+  restart: () => set({ isShuttingDown: false, isLocked: true }),
 
   openWindow: (title, component, props = {}) => {
     const { windows, maxZIndex } = get();
-    // If window already open, just focus it
     const existing = windows.find((w) => w.title === title);
     if (existing) {
       set((state) => ({
@@ -21,7 +33,6 @@ const useOsStore = create((set, get) => ({
       }));
       return;
     }
-
     const newZIndex = maxZIndex + 1;
     set((state) => ({
       windows: [
